@@ -14,6 +14,15 @@
 # No usar clases ni librerías externas.
 # No imprimir dentro de la función.
 
+def crear_dicc_cadena(cadena):
+    dicc_cadena = {}
+    for caracter in cadena:
+        if caracter in dicc_cadena.keys():
+            dicc_cadena[caracter] += 1
+        else:
+            dicc_cadena[caracter] = 1
+    return dicc_cadena
+
 def son_anagramas(a:str, b:str) -> bool:
     a_min = a.lower()
     b_min = b.lower()
@@ -22,17 +31,8 @@ def son_anagramas(a:str, b:str) -> bool:
     b_sin_espacio = b_min.replace(" ", "")
     
     if len(a_sin_espacio) == len(b_sin_espacio):
-        dicc_letras_a = {}
-        dicc_letras_b = {}
-        for posicion in range(len(a_sin_espacio)):
-            if a_sin_espacio[posicion] in dicc_letras_a.keys():
-                dicc_letras_a[a_sin_espacio[posicion]] += 1
-            else:
-                dicc_letras_a[a_sin_espacio[posicion]] = 1
-            if b_sin_espacio[posicion] in dicc_letras_b.keys():
-                dicc_letras_b[b_sin_espacio[posicion]] += 1
-            else:
-                dicc_letras_b[b_sin_espacio[posicion]] = 1
+        dicc_letras_a = crear_dicc_cadena(a_sin_espacio)
+        dicc_letras_b = crear_dicc_cadena(b_sin_espacio)
         return dicc_letras_b == dicc_letras_a
     else:
         return False
