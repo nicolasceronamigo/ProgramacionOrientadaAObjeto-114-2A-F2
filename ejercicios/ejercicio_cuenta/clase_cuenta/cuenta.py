@@ -24,8 +24,9 @@ class CuentaBancaria:
     def depositar(self, monto: float):
         self.saldo += monto
     def retirar(self, monto: float):
-        if self.saldo - monto >= 0:
-            self.saldo -= monto
+        if self.saldo < monto:
+            raise Exception("Saldo insuficiente")
+        self.saldo -= monto
     def mostrarDatos(self):
-        print(f"Cuenta: {self.numeroCuenta} - Titular: {self.titular}, Saldo: {self.saldo}")
+        return f"Cuenta: {self.numeroCuenta} - Titular: {self.titular}, Saldo: {self.saldo}"
 
